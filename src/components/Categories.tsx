@@ -1,6 +1,7 @@
 import { Button } from "@/components/ui/button";
 import { Card } from "@/components/ui/card";
 import { LandPlot, Wrench, Tractor, Warehouse } from "lucide-react";
+import { useNavigate } from "react-router-dom";
 
 const categories = [
   {
@@ -9,6 +10,7 @@ const categories = [
     description: "Binlerce tarla ilanına göz atın. Sulak, kuru veya özel ihtiyaçlarınıza uygun tarlaları bulun.",
     stats: "15,000+ ilan",
     color: "from-green-500 to-emerald-600",
+    link: "/tarla-ara",
   },
   {
     icon: Wrench,
@@ -16,6 +18,7 @@ const categories = [
     description: "Ekim, hasat, gübreleme, ilaçlama ve daha fazlası. Profesyonel hizmet sağlayıcılar burada.",
     stats: "25+ hizmet türü",
     color: "from-amber-500 to-orange-600",
+    link: "/hizmet-ara",
   },
   {
     icon: Tractor,
@@ -23,6 +26,7 @@ const categories = [
     description: "Biçerdöver, traktör, ekim makinesi ve tüm tarım makinelerini saatlik veya günlük kiralayın.",
     stats: "5,000+ makine",
     color: "from-blue-500 to-cyan-600",
+    link: "/makine-ara",
   },
   {
     icon: Warehouse,
@@ -30,10 +34,12 @@ const categories = [
     description: "Ürünleriniz için güvenli depolama alanları. Silo, soğuk hava deposu ve ambar seçenekleri.",
     stats: "200+ depo",
     color: "from-purple-500 to-pink-600",
+    link: "/depo-ara",
   },
 ];
 
 const Categories = () => {
+  const navigate = useNavigate();
   return (
     <section className="py-20 bg-muted/30">
       <div className="container px-4 mx-auto">
@@ -52,8 +58,9 @@ const Categories = () => {
             return (
               <Card 
                 key={index}
-                className="group p-6 hover:shadow-elevated transition-all duration-300 hover:-translate-y-2 border-border/50"
+                className="group p-6 hover:shadow-elevated transition-all duration-300 hover:-translate-y-2 border-border/50 cursor-pointer"
                 style={{ animationDelay: `${index * 100}ms` }}
+                onClick={() => navigate(category.link)}
               >
                 <div className={`w-14 h-14 rounded-xl bg-gradient-to-br ${category.color} flex items-center justify-center mb-4 group-hover:scale-110 transition-transform duration-300`}>
                   <Icon className="h-7 w-7 text-white" />

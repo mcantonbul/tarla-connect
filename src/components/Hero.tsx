@@ -1,9 +1,12 @@
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Search, MapPin } from "lucide-react";
+import { useNavigate } from "react-router-dom";
 import heroImage from "@/assets/hero-farmland.jpg";
 
 const Hero = () => {
+  const navigate = useNavigate();
+
   return (
     <section className="relative min-h-[85vh] flex items-center justify-center overflow-hidden">
       {/* Background Image with Overlay */}
@@ -43,7 +46,10 @@ const Hero = () => {
                   className="border-0 bg-muted/50 h-12"
                 />
               </div>
-              <Button className="h-12 px-8 bg-gradient-to-r from-accent to-secondary hover:opacity-90 transition-opacity">
+              <Button 
+                className="h-12 px-8 bg-gradient-to-r from-accent to-secondary hover:opacity-90 transition-opacity"
+                onClick={() => navigate('/tarla-ara')}
+              >
                 <Search className="mr-2 h-5 w-5" />
                 Ara
               </Button>

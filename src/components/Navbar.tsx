@@ -1,6 +1,7 @@
 import { Button } from "@/components/ui/button";
 import { Leaf, Menu } from "lucide-react";
 import { useState } from "react";
+import { Link } from "react-router-dom";
 
 const Navbar = () => {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
@@ -10,27 +11,27 @@ const Navbar = () => {
       <div className="container mx-auto px-4">
         <div className="flex items-center justify-between h-16">
           {/* Logo */}
-          <div className="flex items-center space-x-2">
+          <Link to="/" className="flex items-center space-x-2">
             <div className="w-10 h-10 rounded-xl bg-gradient-to-br from-primary to-accent flex items-center justify-center">
               <Leaf className="h-6 w-6 text-primary-foreground" />
             </div>
             <span className="text-2xl font-bold text-foreground">TarlaHub</span>
-          </div>
+          </Link>
 
           {/* Desktop Navigation */}
           <div className="hidden md:flex items-center space-x-8">
-            <a href="#" className="text-foreground hover:text-primary transition-colors font-medium">
+            <Link to="/tarla-ara" className="text-foreground hover:text-primary transition-colors font-medium">
               Tarla Kirala
-            </a>
-            <a href="#" className="text-foreground hover:text-primary transition-colors font-medium">
+            </Link>
+            <Link to="/hizmet-ara" className="text-foreground hover:text-primary transition-colors font-medium">
               Hizmetler
-            </a>
-            <a href="#" className="text-foreground hover:text-primary transition-colors font-medium">
+            </Link>
+            <Link to="/makine-ara" className="text-foreground hover:text-primary transition-colors font-medium">
               Makineler
-            </a>
-            <a href="#" className="text-foreground hover:text-primary transition-colors font-medium">
+            </Link>
+            <Link to="/depo-ara" className="text-foreground hover:text-primary transition-colors font-medium">
               Depolama
-            </a>
+            </Link>
           </div>
 
           {/* CTA Buttons */}
@@ -55,18 +56,18 @@ const Navbar = () => {
         {/* Mobile Menu */}
         {isMenuOpen && (
           <div className="md:hidden py-4 space-y-4 border-t border-border animate-slide-in">
-            <a href="#" className="block text-foreground hover:text-primary transition-colors font-medium">
+            <Link to="/tarla-ara" className="block text-foreground hover:text-primary transition-colors font-medium">
               Tarla Kirala
-            </a>
-            <a href="#" className="block text-foreground hover:text-primary transition-colors font-medium">
+            </Link>
+            <Link to="/hizmet-ara" className="block text-foreground hover:text-primary transition-colors font-medium">
               Hizmetler
-            </a>
-            <a href="#" className="block text-foreground hover:text-primary transition-colors font-medium">
+            </Link>
+            <Link to="/makine-ara" className="block text-foreground hover:text-primary transition-colors font-medium">
               Makineler
-            </a>
-            <a href="#" className="block text-foreground hover:text-primary transition-colors font-medium">
+            </Link>
+            <Link to="/depo-ara" className="block text-foreground hover:text-primary transition-colors font-medium">
               Depolama
-            </a>
+            </Link>
             <div className="flex flex-col space-y-2 pt-4">
               <Button variant="ghost" className="w-full">
                 Giriş Yap
