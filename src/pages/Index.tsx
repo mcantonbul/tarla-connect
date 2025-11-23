@@ -1,23 +1,28 @@
+import { useState } from 'react';
 import Navbar from "@/components/Navbar";
-import Hero from "@/components/Hero";
-import Categories from "@/components/Categories";
-import FeaturedListings from "@/components/FeaturedListings";
-import HowItWorks from "@/components/HowItWorks";
-import CallToAction from "@/components/CallToAction";
-import Footer from "@/components/Footer";
+import MapView from "@/components/MapView";
+import OnboardingQuest from "@/components/OnboardingQuest";
+import GameStats from "@/components/GameStats";
+import ActivityFeed from "@/components/ActivityFeed";
 
 const Index = () => {
+  const [showOnboarding, setShowOnboarding] = useState(true);
+
   return (
-    <div className="min-h-screen">
+    <div className="min-h-screen bg-background">
       <Navbar />
-      <main>
-        <Hero />
-        <Categories />
-        <FeaturedListings />
-        <HowItWorks />
-        <CallToAction />
-      </main>
-      <Footer />
+      
+      {/* Onboarding Quest - hikaye tabanlı başlangıç */}
+      {showOnboarding && <OnboardingQuest />}
+      
+      {/* Ana harita görünümü */}
+      <MapView onLandClick={(land) => console.log('Tarla tıklandı:', land)} />
+      
+      {/* Sol panel - oyuncu bilgileri */}
+      <GameStats />
+      
+      {/* Sağ panel - canlı aktiviteler */}
+      <ActivityFeed />
     </div>
   );
 };
