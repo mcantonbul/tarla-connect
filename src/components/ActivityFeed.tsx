@@ -1,68 +1,99 @@
 import { Card } from './ui/card';
 import { ScrollArea } from './ui/scroll-area';
-import { Avatar, AvatarFallback } from './ui/avatar';
+import { Calendar, TrendingUp, Tractor, Package } from 'lucide-react';
 
-const ActivityFeed = () => {
-  const activities = [
-    { id: 1, user: "Ahmet K.", action: "Konya'da 50 dönüm buğday hasat etti", time: "2 dk önce", avatar: "AK", type: "harvest" },
-    { id: 2, user: "Zeynep Y.", action: "Trakya'da yeni tarla kiraladı", time: "5 dk önce", avatar: "ZY", type: "rent" },
-    { id: 3, user: "Mehmet S.", action: "Biçerdöver kiralaması tamamladı", time: "8 dk önce", avatar: "MS", type: "machine" },
-    { id: 4, user: "Ayşe D.", action: "İlk rozet kazandı: 🌾 İlk Hasat", time: "12 dk önce", avatar: "AD", type: "badge" },
-    { id: 5, user: "Can M.", action: "Seviye 5'e yükseldi!", time: "15 dk önce", avatar: "CM", type: "levelup" },
+const MyActivities = () => {
+  // Kullanıcının son aktiviteleri
+  const myActivities = [
+    { 
+      id: 1, 
+      type: "harvest", 
+      title: "Hasat Tamamlandı", 
+      description: "Konya Ovası - 50 dönüm buğday",
+      amount: "+₺45,000",
+      time: "2 saat önce",
+      icon: TrendingUp,
+      color: "text-green-600 bg-green-500/10"
+    },
+    { 
+      id: 2, 
+      type: "service", 
+      title: "Makine Kiralaması", 
+      description: "Biçerdöver - 8 saat",
+      amount: "-₺12,000",
+      time: "5 saat önce",
+      icon: Tractor,
+      color: "text-amber-600 bg-amber-500/10"
+    },
+    { 
+      id: 3, 
+      type: "storage", 
+      title: "Depolama Başladı", 
+      description: "Silo - 150 ton buğday",
+      amount: "-₺4,500",
+      time: "1 gün önce",
+      icon: Package,
+      color: "text-blue-600 bg-blue-500/10"
+    },
+    { 
+      id: 4, 
+      type: "planning", 
+      title: "Ekim Planlandı", 
+      description: "Trakya - 100 dönüm ayçiçeği",
+      amount: "Tahmini: ₺48,000",
+      time: "2 gün önce",
+      icon: Calendar,
+      color: "text-purple-600 bg-purple-500/10"
+    },
   ];
-
-  const getActivityColor = (type: string) => {
-    switch(type) {
-      case 'harvest': return 'border-l-green-500';
-      case 'rent': return 'border-l-blue-500';
-      case 'machine': return 'border-l-amber-500';
-      case 'badge': return 'border-l-purple-500';
-      case 'levelup': return 'border-l-pink-500';
-      default: return 'border-l-gray-500';
-    }
-  };
 
   return (
     <Card className="absolute top-20 right-4 z-10 w-80 bg-background/95 backdrop-blur-sm border-border/50 shadow-elevated">
       <div className="p-4 border-b border-border/50">
-        <div className="flex items-center justify-between">
-          <h3 className="font-bold text-foreground">Canlı Aktiviteler</h3>
-          <div className="flex items-center gap-1">
-            <div className="w-2 h-2 rounded-full bg-green-500 animate-pulse"></div>
-            <span className="text-xs text-muted-foreground">Canlı</span>
-          </div>
-        </div>
+        <h3 className="font-bold text-foreground">Son Aktiviteler</h3>
       </div>
       
       <ScrollArea className="h-[400px]">
         <div className="p-4 space-y-3">
-          {activities.map((activity) => (
-            <div
-              key={activity.id}
-              className={`flex gap-3 p-3 rounded-lg bg-muted/30 hover:bg-muted/50 transition-colors border-l-4 ${getActivityColor(activity.type)}`}
-            >
-              <Avatar className="h-10 w-10 border-2 border-background shadow-sm">
-                <AvatarFallback className="bg-gradient-to-br from-primary to-accent text-primary-foreground text-xs font-bold">
-                  {activity.avatar}
-                </AvatarFallback>
-              </Avatar>
-              <div className="flex-1 min-w-0">
-                <p className="text-sm text-foreground font-medium truncate">
-                  {activity.user}
-                </p>
-                <p className="text-xs text-muted-foreground">
-                  {activity.action}
-                </p>
-                <span className="text-xs text-muted-foreground/70">
-                  {activity.time}
-                </span>
+          {myActivities.map((activity) => {
+            const Icon = activity.icon;
+            return (
+              <div
+                key={activity.id}
+                className="p-3 rounded-lg bg-muted/30 hover:bg-muted/50 transition-colors"
+              >
+                <div className="flex gap-3">
+                  <div className={`w-10 h-10 rounded-lg ${activity.color} flex items-center justify-center flex-shrink-0`}>
+                    <Icon className="h-5 w-5" />
+                  </div>
+                  <div className="flex-1 min-w-0">
+                    <div className="flex items-start justify-between gap-2 mb-1">
+                      <p className="text-sm font-semibold text-foreground">
+                        {activity.title}
+                      </p>
+                      <span className={`text-xs font-bold whitespace-nowrap ${
+                        activity.amount.startsWith('+') ? 'text-green-600' : 
+                        activity.amount.startsWith('-') ? 'text-red-600' : 
+                        'text-muted-foreground'
+                      }`}>
+                        {activity.amount}
+                      </span>
+                    </div>
+                    <p className="text-xs text-muted-foreground mb-1">
+                      {activity.description}
+                    </p>
+                    <span className="text-xs text-muted-foreground/70">
+                      {activity.time}
+                    </span>
+                  </div>
+                </div>
               </div>
-            </div>
-          ))}
+            );
+          })}
         </div>
       </ScrollArea>
     </Card>
   );
 };
 
-export default ActivityFeed;
+export default MyActivities;
